@@ -246,12 +246,6 @@ bool CActiveMasternode::Register(CTxIn vin, CService service, CKey keyCollateral
 {
     auto mnode = mnodeman.Find(service);
 
-    if(mnode && mnode->vin != vin)
-    {
-        errorMessage = strprintf("Duplicate Masternode address: %s", service.ToString());
-        LogPrintf("CActiveMasternode::Register() -  %s\n", errorMessage);
-        return false;
-    }
 
     CMasternodePing mnp(vin);
     if (!mnp.Sign(keyMasternode, pubKeyMasternode)) {
